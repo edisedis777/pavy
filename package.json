@@ -32,7 +32,6 @@
     "sanitize-html": "^2.13.1",
     "satori-html": "^0.3.2",
     "superjson": "^2.2.2"
-    // Consider removing `sharp` for now
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
