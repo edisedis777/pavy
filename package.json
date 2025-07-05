@@ -8,7 +8,6 @@
     "preview": "astro preview",
     "check": "astro check",
     "format": "prettier -w --cache ."
-    // Optional: Add other scripts back once this works
   },
   "dependencies": {
     "@astrojs/cloudflare": "^4.0.0", 
