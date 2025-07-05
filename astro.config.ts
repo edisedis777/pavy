@@ -70,7 +70,7 @@ export default defineConfig({
 	site: getSite(),
 	base: process.env.BASE || BASE_PATH,
 	output: "server", 
-	adapter: cloudflare(),
+	adapter: staticAdapter(),
 	redirects: key_value_from_json["redirects"]
 		? modifyRedirectPaths(key_value_from_json["redirects"], process.env.BASE || BASE_PATH)
 		: {},
