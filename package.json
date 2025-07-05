@@ -1,16 +1,29 @@
 {
-  "name": "astro-notion-cms-website-blog",
+  "name": "pavy-astro-notion-cms-website-blog",
   "version": "1.3",
   "private": false,
+  "cacheVersion": {
+    "tmpJSONCache": "v1",
+    "tmpHTMLCache": "vB",
+    "tmpOGImagesCache": "v1",
+    "publicNotion": "v1",
+    "lastBuildTimestampStore": "vA"
+  },
   "scripts": {
+    "predev": "rm -rf buildcache && for folder in blocks-html-cache rss-cache; do if [ -d \"./tmp/$folder\" ]; then echo \"Deleting $folder folder\"; rm -rf \"./tmp/$folder\"; else echo \"No $folder folder to delete\"; fi; done",
     "dev": "astro dev",
-    "build": "astro build",
+    "prebuild-local": "rm -rf buildcache && for folder in blocks-html-cache rss-cache; do if [ -d \"./tmp/$folder\" ]; then echo \"Deleting $folder folder\"; rm -rf \"./tmp/$folder\"; else echo \"No $folder folder to delete\"; fi; done",
+    "build-local": "astro build",
+    "start": "astro dev",
+    "build": "rm -rf buildcache && astro build",
+    "postbuild": "pagefind --site dist",
     "preview": "astro preview",
+    "format": "prettier -w --cache .",
     "check": "astro check",
-    "format": "prettier -w --cache ."
+    "build:cached": "npm run cache:fetch && astro build"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^4.0.0", 
+    "@astrojs/cloudflare": "^5.0.0", // ✅ NEW
     "@astrojs/partytown": "^2.1.3",
     "@astrojs/rss": "^4.0.11",
     "@atproto/api": "^0.13.19",
@@ -31,6 +44,7 @@
     "png-to-ico": "^2.1.8",
     "sanitize-html": "^2.13.1",
     "satori-html": "^0.3.2",
+    "sharp": "^0.33.5",
     "superjson": "^2.2.2"
   },
   "devDependencies": {
@@ -67,8 +81,5 @@
     "tailwindcss": "^4.0.2",
     "typescript": "^5.7.2"
   },
-  "packageManager": "pnpm@9.15.0",
-  "engines": {
-    "node": "20.x"
-  }
+  "packageManager": "pnpm@9.15.0"
 }
