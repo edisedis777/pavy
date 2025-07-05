@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import cloudflare from "@astrojs/cloudflare";
 import tailwindcss from "@tailwindcss/vite";
 
 import path from "path";
@@ -66,10 +67,11 @@ function modifyRedirectPaths(
 	return modifiedRedirects;
 }
 
-// https://astro.build/config
 export default defineConfig({
 	site: getSite(),
 	base: process.env.BASE || BASE_PATH,
+	output: "server", 
+	adapter: cloudflare(),
 	redirects: key_value_from_json["redirects"]
 		? modifyRedirectPaths(key_value_from_json["redirects"], process.env.BASE || BASE_PATH)
 		: {},
@@ -80,7 +82,6 @@ export default defineConfig({
 		CustomIconDownloader(),
 		CSSWriter(),
 		partytown({
-			// Adds dataLayer.push as a forwarding-event.
 			config: {
 				forward: ["dataLayer.push"],
 			},
